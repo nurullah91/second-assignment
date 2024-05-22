@@ -45,11 +45,18 @@ const getSingleProduct = async (req: Request, res: Response) => {
     const { productId } = req.params;
     const result = await ProductService.getSingleProductById(productId);
 
-    res.status(200).json({
-      success: true,
-      message: "Product fetched successfully!",
-      data: result,
-    });
+    if (result === null) {
+      res.status(500).json({
+        success: false,
+        message: "No product found with the ID",
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+        message: "Product fetched successfully!",
+        data: result,
+      });
+    }
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -77,9 +84,41 @@ const deleteProduct = async (req: Request, res: Response) => {
   }
 };
 
+const updateProduct = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.params;
+    const updateInfo = req.body;
+
+    const result = await ProductService.updateProductById(
+      productId,
+      updateInfo
+    );
+
+    if (result.matchedCount === 0) {
+      res.status(500).json({
+        success: false,
+        message: "No product found with the ID",
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+        message: "Product updated successfully!",
+        data: result,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "An Error occurred",
+      error: error,
+    });
+  }
+};
+
 export const ProductControllers = {
   createProduct,
   getAllProducts,
   getSingleProduct,
   deleteProduct,
+  updateProduct,
 };

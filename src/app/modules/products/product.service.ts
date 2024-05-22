@@ -20,9 +20,19 @@ const deleteProductById = async (id: string) => {
   return result;
 };
 
+const updateProductById = async (id: string, updateInfo: Partial<Product>) => {
+  const result = await ProductModel.updateOne(
+    { _id: id },
+    { $set: updateInfo }
+  );
+
+  return result;
+};
+
 export const ProductService = {
   createProductIntoDB,
   getAllProductsFromDB,
   getSingleProductById,
   deleteProductById,
+  updateProductById,
 };
