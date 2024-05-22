@@ -25,5 +25,13 @@ const productSchema = new Schema<Product>({
   inventory: { type: inventorySchema, required: true },
 });
 
+// Create a text index for search
+productSchema.index({
+  name: "text",
+  description: "text",
+  category: "text",
+  tags: "text",
+});
+
 // Create the Product model
 export const ProductModel = model("Product", productSchema);

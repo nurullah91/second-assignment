@@ -6,15 +6,23 @@ const createProductIntoDB = async (product: Product) => {
   return result;
 };
 
-const getAllProductsFromDB = async () => {
-  const result = await ProductModel.find();
-  return result;
+const getAllProductsFromDB = async (searchParams: any) => {
+  if (searchParams === undefined) {
+    const result = await ProductModel.find();
+    return result;
+  } else {
+    const result = await ProductModel.find({
+      $text: { $search: searchParams },
+    });
+    return result;
+  }
 };
 
 const getSingleProductById = async (id: string) => {
   const result = await ProductModel.findById(id);
   return result;
 };
+
 const deleteProductById = async (id: string) => {
   const result = await ProductModel.deleteOne({ _id: id });
   return result;
