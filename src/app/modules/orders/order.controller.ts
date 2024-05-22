@@ -36,7 +36,7 @@ const createOrder = async (req: Request, res: Response) => {
     if (product.inventory.quantity === 0) {
       product.inventory.inStock = false;
     }
-
+    // send back product info to the mongoDB database
     await product.save();
 
     res.status(200).json({
