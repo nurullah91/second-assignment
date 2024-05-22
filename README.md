@@ -15,3 +15,5 @@ npm run start:dev
 ```
 
 Then the server will be run on the port of 5000.
+
+### Live link of this Server: e-commerce-backend-drab-nu.vercel.app
