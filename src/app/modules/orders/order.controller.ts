@@ -2,18 +2,46 @@ import { Request, Response } from "express";
 import { Order } from "./order.interface";
 import { OrderServices } from "./order.service";
 import orderValidationSchema from "./order.validation";
+import { ProductService } from "../products/product.service";
 
 const createOrder = async (req: Request, res: Response) => {
   try {
     const order: Order = req.body;
 
     const validateOrder = orderValidationSchema.parse(order);
+    const { productId, quantity } = validateOrder;
 
+    // check if the product Id is valid
+    const product = await ProductService.getSingleProductById(productId);
+
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found",
+      });
+    }
+    // check order quantity and product quantity
+    if (quantity > product.inventory.quantity) {
+      return res.status(400).json({
+        success: false,
+        message: "Insufficient quantity available in inventory",
+      });
+    }
+
+    // Create a order after checking quantity
     const result = await OrderServices.createOrderIntoDb(validateOrder);
+
+    // change inventory of the product
+    product.inventory.quantity -= quantity;
+    if (product.inventory.quantity === 0) {
+      product.inventory.inStock = false;
+    }
+
+    await product.save();
 
     res.status(200).json({
       success: true,
-      message: "Product created successfully",
+      message: "Order created successfully",
       data: result,
     });
   } catch (error) {
