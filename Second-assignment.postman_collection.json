@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "523a2662-ec62-404d-a80a-fb3a52ca9dae",
+		"name": "Second-assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27394234"
+	},
+	"item": [
+		{
+			"name": "create-product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"One plus 10\",\r\n    \"description\": \"A Monstart and powerful smartphone with update new exciting feature.\",\r\n    \"price\": 399,\r\n    \"category\": \"Electronics\",\r\n    \"tags\": [\"smartphone\", \"One plus\", \"OneUI\"],\r\n    \"variants\": [\r\n        {\r\n            \"type\": \"Color\",\r\n            \"value\": \"Midnight Blue\"\r\n        },\r\n        {\r\n            \"type\": \"Storage Capacity\",\r\n            \"value\": \"128GB\"\r\n        }\r\n    ],\r\n    \"inventory\": {\r\n        \"quantity\": 20,\r\n        \"inStock\": true\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "e-commerce-backend-drab-nu.vercel.app/api/products",
+					"host": [
+						"e-commerce-backend-drab-nu",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllProducts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "e-commerce-backend-drab-nu.vercel.app/api/products",
+					"host": [
+						"e-commerce-backend-drab-nu",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get single product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "e-commerce-backend-drab-nu.vercel.app/api/products/664d93de8ba95704f3e300b8",
+					"host": [
+						"e-commerce-backend-drab-nu",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"products",
+						"664d93de8ba95704f3e300b8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "e-commerce-backend-drab-nu.vercel.app/api/products/664d93de8ba95704f3e300b8",
+					"host": [
+						"e-commerce-backend-drab-nu",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"products",
+						"664d93de8ba95704f3e300b8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update product",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"inventory\":{\r\n    \"quantity\": 300,\r\n    \"inStock\": true\r\n}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "e-commerce-backend-drab-nu.vercel.app/api/products/664d93de8ba95704f3e300b8",
+					"host": [
+						"e-commerce-backend-drab-nu",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"products",
+						"664d93de8ba95704f3e300b8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"nurullah@gmail.com\",\r\n    \"productId\": \"664d93de8ba95704f3e300b8\",\r\n    \"price\": 799,\r\n    \"quantity\": 40\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Order",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/orders?email=nurullah2@programming-hero.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "nurullah2@programming-hero.com"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
